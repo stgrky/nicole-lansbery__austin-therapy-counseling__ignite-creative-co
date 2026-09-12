@@ -40,8 +40,8 @@ export function ContactForm() {
           Thank you for reaching out.
         </p>
         <p className="mt-2 text-[15px] leading-relaxed text-[var(--color-muted)]">
-          Your message has been received. You&rsquo;ll hear back personally,
-          usually within two business days.
+          Your message has been received, and you&rsquo;ll hear back
+          personally.
         </p>
       </div>
     );

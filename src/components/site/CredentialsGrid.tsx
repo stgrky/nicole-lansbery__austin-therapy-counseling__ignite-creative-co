@@ -34,8 +34,7 @@ export function CredentialsGrid({ about, services }: Props) {
                     Areas of practice
                   </h2>
                   <p className="mt-4 text-base leading-relaxed text-[var(--color-muted)]">
-                    A deliberately narrow scope — depth over breadth, and
-                    honest referrals for anything outside it.
+                    The areas I work in most often.
                   </p>
                 </div>
               </Reveal>

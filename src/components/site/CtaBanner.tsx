@@ -14,7 +14,10 @@ type Props = {
 
 export function CtaBanner({
   heading = "Ready when you are",
-  body = "Reach out to schedule a free consultation. I'll get back to you within two business days.",
+  // No promise of a free consultation or a response time: both are the
+  // practice's to make, and this default is hardcoded rather than editable in
+  // the Studio, so a client cannot correct it if it is wrong for them.
+  body = "Reach out and we'll find a time to talk.",
   ctaLabel = "Get in touch",
   ctaHref = "/contact",
 }: Props) {

@@ -65,19 +65,18 @@ export default async function BlogIndexRoute({ searchParams }: BlogPageProps) {
         <Container className="py-20 text-center md:py-28">
           <Reveal>
             <p className="text-[11px] font-medium tracking-[0.22em] uppercase text-[var(--color-accent-strong)]">
-              The clinical library
+              Writing
             </p>
           </Reveal>
           <Reveal delay={0.08}>
             <h1 className="mt-4 font-serif text-4xl font-semibold leading-[1.1] tracking-tight text-[var(--color-foreground)] md:text-[3.4rem]">
-              Evidence, explained plainly.
+              Notes from the practice.
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-[var(--color-muted)]">
-              What the research actually says about assessment, anxiety, OCD,
-              and trauma — translated from journal-speak into language you can
-              use.
+              Occasional writing on therapy, and the questions that come up
+              most often.
             </p>
           </Reveal>
         </Container>

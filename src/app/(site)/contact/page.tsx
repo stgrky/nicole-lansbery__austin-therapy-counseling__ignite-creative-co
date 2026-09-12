@@ -136,8 +136,7 @@ export default async function ContactPageRoute() {
               {!hasScheduler ? (
                 <Reveal delay={0.36}>
                   <p className="mt-10 text-sm italic text-[var(--color-muted)]">
-                    I read every email personally and reply within two
-                    business days — usually faster.
+                    I read every email personally.
                   </p>
                 </Reveal>
               ) : null}
