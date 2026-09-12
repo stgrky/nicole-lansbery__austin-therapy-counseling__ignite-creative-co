@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+/*
+ * THEME SYSTEM — see TEMPLATES.md
+ *
+ * Three independent axes drive every site: layout (the components), palette
+ * (the --p-* color layer), and fonts (the --f-* font layer). Palette and fonts
+ * are swapped at runtime by `data-palette` / `data-fonts` attributes on <html>,
+ * which are set from Sanity siteSettings. The component-facing token names
+ * (--color-*, font-serif, font-sans) are kept as stable ALIASES that point at
+ * the active palette/font layer, so swapping a theme never touches a component.
+ */
+
+@theme inline {
+  /* Color tokens → active palette layer (--p-*) */
+  --color-background: var(--p-background);
+  --color-surface: var(--p-surface);
+  --color-foreground: var(--p-foreground);
+  --color-muted: var(--p-muted);
+  --color-subtle: var(--p-subtle);
+  --color-accent: var(--p-accent);
+  --color-accent-strong: var(--p-accent-strong);
+  --color-accent-soft: var(--p-accent-soft);
+
+  /* Semantic font tokens → active font layer (--f-*) */
+  --font-display: var(--f-display);
+  --font-body: var(--f-body);
+  /* Back-compat aliases: existing components use font-serif / font-sans */
+  --font-serif: var(--f-display);
+  --font-sans: var(--f-body);
+
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 16px rgb(15 23 42 / 0.04);
+}
+
+/* ── Defaults: Sage palette + Cormorant fonts (Grove's signature) ── */
+:root {
+  --p-background: #fbfaf7;
+  --p-surface: #ffffff;
+  --p-foreground: #1f2937;
+  --p-muted: #6b7280;
+  --p-subtle: #d1d5db;
+  --p-accent: #6b8e7f;
+  --p-accent-strong: #4a6a5d;
+  --p-accent-soft: #e8efeb;
+
+  --f-display: var(--font-cormorant), Georgia, serif;
+  --f-body: var(--font-inter), system-ui, sans-serif;
+}
+
+/* ── Palette Library ── (sage is the :root default above) ── */
+[data-palette="navy"] {
+  --p-background: #f8fafc;
+  --p-surface: #ffffff;
+  --p-foreground: #0f172a;
+  --p-muted: #64748b;
+  --p-subtle: #e2e8f0;
+  --p-accent: #1e4d6b;
+  --p-accent-strong: #14334a;
+  --p-accent-soft: #e7eef3;
+}
+[data-palette="terracotta"] {
+  --p-background: #fdf6f0;
+  --p-surface: #ffffff;
+  --p-foreground: #2b2420;
+  --p-muted: #8a7c72;
+  --p-subtle: #ece0d6;
+  --p-accent: #c4623f;
+  --p-accent-strong: #a04a2c;
+  --p-accent-soft: #f6e3d9;
+}
+[data-palette="lavender"] {
+  --p-background: #f6f5fa;
+  --p-surface: #ffffff;
+  --p-foreground: #3a3a4a;
+  --p-muted: #8585a0;
+  --p-subtle: #e4e2ee;
+  --p-accent: #8897bf;
+  --p-accent-strong: #5f6f9a;
+  --p-accent-soft: #e8ebf4;
+}
+[data-palette="teal"] {
+  --p-background: #f9fafb;
+  --p-surface: #ffffff;
+  --p-foreground: #1f2933;
+  --p-muted: #6b7280;
+  --p-subtle: #e5e7eb;
+  --p-accent: #2f8f83;
+  --p-accent-strong: #236b62;
+  --p-accent-soft: #e3f0ee;
+}
+
+/* ── Font Library ── (cormorant is the :root default above) ── */
+[data-fonts="libre-franklin"] {
+  --f-display: var(--font-libre-franklin), system-ui, sans-serif;
+  --f-body: var(--font-inter), system-ui, sans-serif;
+}
+[data-fonts="fraunces"] {
+  --f-display: var(--font-fraunces), Georgia, serif;
+  --f-body: var(--font-inter), system-ui, sans-serif;
+}
+[data-fonts="marcellus"] {
+  --f-display: var(--font-marcellus), Georgia, serif;
+  --f-body: var(--font-mulish), system-ui, sans-serif;
+}
+[data-fonts="plus-jakarta"] {
+  --f-display: var(--font-plus-jakarta), system-ui, sans-serif;
+  --f-body: var(--font-inter), system-ui, sans-serif;
+}
+
+html,
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.prose-serif h2,
+.prose-serif h3,
+.prose-serif h4 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-foreground);
+}
+
+.prose-serif h2 {
+  font-size: 1.75rem;
+  margin: 2rem 0 1rem;
+}
+.prose-serif h3 {
+  font-size: 1.4rem;
+  margin: 1.75rem 0 0.875rem;
+}
+.prose-serif h4 {
+  font-size: 1.15rem;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.prose-serif p {
+  margin: 0 0 1.25rem;
+  line-height: 1.75;
+}
+
+.prose-serif ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 0 0 1.25rem;
+}
+
+.prose-serif ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin: 0 0 1.25rem;
+}
+
+.prose-serif blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1rem;
+  color: var(--color-muted);
+  font-style: italic;
+  margin: 1.5rem 0;
+}
+
+.prose-serif a {
+  color: var(--color-accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
