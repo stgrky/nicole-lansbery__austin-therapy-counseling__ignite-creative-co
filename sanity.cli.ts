@@ -8,5 +8,5 @@ export default defineCliConfig({
     dataset,
   },
   studioHost: "austin-therapy-counseling",
-  deployment: { autoUpdates: true },
+  deployment: { autoUpdates: true, appId: "jdtcwnrwwjp7kuq1nzngaydh" },
 });
