@@ -10,9 +10,14 @@ import { safeFetch } from "@/sanity/client";
 import { contactPageQuery } from "@/sanity/queries";
 import type { ContactPage } from "@/sanity/types";
 
-export const metadata: Metadata = {
-  title: "Contact",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getContact();
+  return {
+    title: seo?.title || "Contact",
+    ...(seo?.description ? { description: seo.description } : {}),
+    alternates: { canonical: "/contact" },
+  };
+}
 
 async function getContact() {
   return safeFetch<ContactPage>(contactPageQuery, {}, defaultContactPage);

@@ -44,7 +44,13 @@ export interface WhatToExpectStep {
   icon?: string;
 }
 
+export interface SeoFields {
+  title?: string;
+  description?: string;
+}
+
 export interface HomePage {
+  seo?: SeoFields;
   heroEyebrow?: string;
   heroHeading?: string;
   heroSubhead?: string;
@@ -103,6 +109,7 @@ export interface Announcement {
 }
 
 export interface AboutPage {
+  seo?: SeoFields;
   heading?: string;
   intro?: string;
   body?: PortableTextBlock[];
@@ -124,6 +131,7 @@ export interface ServiceItem {
 }
 
 export interface ServicesPage {
+  seo?: SeoFields;
   heading?: string;
   intro?: string;
   services?: ServiceItem[];
@@ -138,6 +146,7 @@ export interface ServicesPage {
 }
 
 export interface ContactPage {
+  seo?: SeoFields;
   heading?: string;
   intro?: string;
   email?: string;

@@ -1,6 +1,7 @@
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { PracticeStructuredData } from "@/components/PracticeStructuredData";
 import { StickyCta } from "@/components/site/StickyCta";
 import { defaultAnnouncement, defaultSiteSettings } from "@/lib/site-defaults";
 import { safeFetch } from "@/sanity/client";
@@ -33,6 +34,7 @@ export default async function SiteLayout({
     <>
       {/* No cursor-follow effect on Meridian — restraint IS the clinical
           signature. (Per Steven: retire the halo-on-every-site habit.) */}
+      <PracticeStructuredData settings={settings} />
       <AnnouncementBar announcement={announcement} />
       <Header
         practiceName={settings.practiceName ?? "Therapy Practice"}

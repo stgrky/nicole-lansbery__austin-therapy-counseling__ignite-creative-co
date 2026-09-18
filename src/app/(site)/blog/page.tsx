@@ -20,6 +20,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Blog",
+  alternates: { canonical: "/blog" },
 };
 
 const POSTS_PER_PAGE = 6;

@@ -11,9 +11,14 @@ import { safeFetch } from "@/sanity/client";
 import { aboutPageQuery } from "@/sanity/queries";
 import type { AboutPage } from "@/sanity/types";
 
-export const metadata: Metadata = {
-  title: "About",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getAbout();
+  return {
+    title: seo?.title || "About",
+    ...(seo?.description ? { description: seo.description } : {}),
+    alternates: { canonical: "/about" },
+  };
+}
 
 async function getAbout() {
   return safeFetch<AboutPage>(aboutPageQuery, {}, defaultAboutPage);

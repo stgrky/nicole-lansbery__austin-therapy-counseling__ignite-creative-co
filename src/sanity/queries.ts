@@ -16,6 +16,7 @@ export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]{
 }`;
 
 export const homePageQuery = groq`*[_type == "homePage"][0]{
+  seo,
   heroEyebrow,
   heroHeading,
   heroSubhead,
@@ -69,6 +70,7 @@ export const announcementQuery = groq`*[_type == "announcement"][0]{
 }`;
 
 export const aboutPageQuery = groq`*[_type == "aboutPage"][0]{
+  seo,
   heading,
   intro,
   body,
@@ -84,6 +86,7 @@ export const aboutPageQuery = groq`*[_type == "aboutPage"][0]{
 }`;
 
 export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{
+  seo,
   heading,
   intro,
   services[]{
@@ -102,6 +105,7 @@ export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{
 }`;
 
 export const contactPageQuery = groq`*[_type == "contactPage"][0]{
+  seo,
   heading,
   intro,
   email,

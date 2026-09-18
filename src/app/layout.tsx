@@ -10,6 +10,8 @@ import {
 } from "next/font/google";
 
 import { defaultSiteSettings } from "@/lib/site-defaults";
+import { Analytics } from "@/components/Analytics";
+import { SITE_URL } from "@/lib/site";
 import { safeFetch } from "@/sanity/client";
 import { urlFor } from "@/sanity/image";
 import { siteSettingsQuery } from "@/sanity/queries";
@@ -95,11 +97,13 @@ export async function generateMetadata(): Promise<Metadata> {
     : null;
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: {
       default: practiceName,
       template: `%s · ${practiceName}`,
     },
     description,
+    openGraph: { siteName: practiceName, type: "website", locale: "en_US" },
     icons: faviconUrl
       ? {
           icon: [{ url: faviconUrl, sizes: "any" }],
@@ -131,7 +135,10 @@ export default async function RootLayout({
       data-fonts={fontPairing}
       className={`${fontVariables} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

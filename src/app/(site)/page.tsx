@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
@@ -56,6 +57,17 @@ async function getTestimonials() {
     {},
     defaultTestimonials
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getHome();
+  return {
+    // The home title stands alone rather than getting " · Practice Name"
+    // appended, since it usually leads with the practice name already.
+    ...(seo?.title ? { title: { absolute: seo.title } } : {}),
+    ...(seo?.description ? { description: seo.description } : {}),
+    alternates: { canonical: "/" },
+  };
 }
 
 export default async function HomePageRoute() {

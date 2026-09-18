@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { track } from "@/lib/track";
+
 type Status = "idle" | "submitting" | "success" | "error";
 
 export function ContactForm() {
@@ -26,6 +28,7 @@ export function ContactForm() {
         }),
       });
       if (!response.ok) throw new Error("Submission failed");
+      track("generate_lead", { form_name: "contact_form" });
       setStatus("success");
       form.reset();
     } catch {

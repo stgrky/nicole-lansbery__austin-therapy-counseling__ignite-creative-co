@@ -24,7 +24,11 @@ export async function safeFetch<T>(
   // name, license number, fees, and bio. It must never render under a client's
   // practice name, so a failed request is allowed to throw (an error page is
   // honest; someone else's credentials are not).
-  const result = await sanityClient.fetch<T | null>(query, params);
+  // Never let Next save a Sanity answer into its fetch cache. Studio edits
+  // must show up immediately, and a cached answer outlives the content it
+  // describes: a build run before content was seeded cached "no site settings"
+  // for a year, and every later build read that instead of asking Sanity.
+  const result = await sanityClient.fetch<T | null>(query, params, { cache: "no-store" });
   if (result !== null) return result;
 
   // A caller that passes null is saying "nothing" is a valid answer — e.g. a

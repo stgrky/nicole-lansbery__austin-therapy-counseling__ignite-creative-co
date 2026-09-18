@@ -107,6 +107,12 @@ export const aboutPage = defineType({
         },
       ],
     }),
+    defineField({
+      name: "seo",
+      title: "Search engine listing",
+      type: "seo",
+      description: "How this page appears in Google. Leave blank to use the page heading.",
+    }),
   ],
   preview: { prepare: () => ({ title: "About Page" }) },
 });

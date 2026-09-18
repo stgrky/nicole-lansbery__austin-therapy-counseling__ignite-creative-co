@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/motion/Reveal";
 import type { AboutPage, ServicesPage } from "@/sanity/types";
@@ -36,6 +38,12 @@ export function CredentialsGrid({ about, services }: Props) {
                   <p className="mt-4 text-base leading-relaxed text-[var(--color-muted)]">
                     The areas I work in most often.
                   </p>
+                  <Link
+                    href="/services"
+                    className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-accent-strong)] underline-offset-4 hover:underline"
+                  >
+                    More about each <span aria-hidden>→</span>
+                  </Link>
                 </div>
               </Reveal>
               <div className="grid gap-5 sm:grid-cols-3">
@@ -56,7 +64,7 @@ export function CredentialsGrid({ about, services }: Props) {
                         {service.title}
                       </h3>
                       {service.description ? (
-                        <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
+                        <p className="mt-3 line-clamp-4 text-sm leading-relaxed text-[var(--color-muted)]">
                           {service.description}
                         </p>
                       ) : null}

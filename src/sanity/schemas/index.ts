@@ -8,11 +8,13 @@ import { category } from "./category";
 import { contactPage } from "./contactPage";
 import { homePage } from "./homePage";
 import { post } from "./post";
+import { seo } from "./seo";
 import { servicesPage } from "./servicesPage";
 import { siteSettings } from "./siteSettings";
 import { testimonial } from "./testimonial";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
+  seo,
   blockContent,
   author,
   category,

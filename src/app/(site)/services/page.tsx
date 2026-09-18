@@ -8,9 +8,14 @@ import { safeFetch } from "@/sanity/client";
 import { servicesPageQuery } from "@/sanity/queries";
 import type { ServicesPage } from "@/sanity/types";
 
-export const metadata: Metadata = {
-  title: "Services",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getServices();
+  return {
+    title: seo?.title || "Services",
+    ...(seo?.description ? { description: seo.description } : {}),
+    alternates: { canonical: "/services" },
+  };
+}
 
 async function getServices() {
   return safeFetch<ServicesPage>(servicesPageQuery, {}, defaultServicesPage);
