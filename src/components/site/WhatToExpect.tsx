@@ -46,10 +46,10 @@ export function WhatToExpect({ heading, intro, steps }: Props) {
               distance={28}
             >
               <article
-                className="group relative h-full rounded-2xl border border-[var(--color-subtle)]/70 bg-[var(--color-surface)] p-7 transition-all duration-500 hover:-translate-y-1 hover:border-[var(--color-accent)]/70 hover:shadow-[0_20px_50px_-24px_rgba(74,106,93,0.35)]"
+                className="relative h-full rounded-2xl border border-[var(--color-subtle)]/70 bg-[var(--color-surface)] p-7"
               >
                 <div
-                  className="inline-flex h-12 w-12 items-center justify-center rounded-full text-2xl transition-transform duration-500 group-hover:scale-110"
+                  className="inline-flex h-12 w-12 items-center justify-center rounded-full text-2xl"
                   style={{ background: "var(--color-accent-soft)" }}
                   aria-hidden
                 >

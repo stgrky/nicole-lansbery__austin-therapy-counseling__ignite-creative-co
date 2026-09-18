@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/motion/Reveal";
+import { anchorId } from "@/lib/anchor";
 import { defaultServicesPage } from "@/lib/site-defaults";
 import { safeFetch } from "@/sanity/client";
 import { servicesPageQuery } from "@/sanity/queries";
@@ -61,14 +62,18 @@ export default async function ServicesPageRoute() {
                   delay={0.1 + index * 0.08}
                   className="h-full"
                 >
+                  {/* Not a link, so no hover lift: a card that rises under the
+                      cursor reads as clickable, and clicking it did nothing.
+                      The id lets the home page's cards jump straight here. */}
                   <article
-                    className="group relative flex h-full flex-col rounded-2xl border border-[var(--color-subtle)]/70 bg-[var(--color-surface)] p-8 transition-all duration-500 hover:-translate-y-1 hover:border-[var(--color-accent)]/70 hover:shadow-[0_24px_60px_-28px_rgba(74,106,93,0.35)]"
+                    id={anchorId(service.title)}
+                    className="relative flex h-full scroll-mt-28 flex-col rounded-2xl border border-[var(--color-subtle)]/70 bg-[var(--color-surface)] p-8"
                   >
                     <div className="flex items-start justify-between gap-4">
                       {service.icon ? (
                         <div
                           aria-hidden
-                          className="flex h-14 w-14 items-center justify-center rounded-full text-2xl transition-transform duration-500 group-hover:scale-110"
+                          className="flex h-14 w-14 items-center justify-center rounded-full text-2xl"
                           style={{ background: "var(--color-accent-soft)" }}
                         >
                           {service.icon}

@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/motion/Reveal";
+import { anchorId } from "@/lib/anchor";
 import type { AboutPage, ServicesPage } from "@/sanity/types";
 
 type Props = {
@@ -53,7 +54,13 @@ export function CredentialsGrid({ about, services }: Props) {
                     delay={0.08 * i}
                     className="h-full"
                   >
-                    <div className="flex h-full flex-col rounded-2xl border border-[var(--color-subtle)]/70 bg-[var(--color-surface)] p-7 shadow-[var(--shadow-card)] transition-all duration-500 hover:-translate-y-1">
+                    {/* A real link: the card lifts on hover, so it has to go
+                        somewhere. It opens this service on the Services page,
+                        where the full description is. */}
+                    <Link
+                      href={`/services#${anchorId(service.title)}`}
+                      className="group flex h-full flex-col rounded-2xl border border-[var(--color-subtle)]/70 bg-[var(--color-surface)] p-7 shadow-[var(--shadow-card)] outline-none transition-all duration-500 hover:-translate-y-1 hover:border-[var(--color-accent)]/60 focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+                    >
                       <span
                         className="flex h-11 w-11 items-center justify-center rounded-full font-serif text-lg font-semibold text-[var(--color-accent-strong)]"
                         style={{ background: "var(--color-accent-soft)" }}
@@ -68,7 +75,10 @@ export function CredentialsGrid({ about, services }: Props) {
                           {service.description}
                         </p>
                       ) : null}
-                    </div>
+                      <span className="mt-auto pt-4 text-sm font-medium text-[var(--color-accent-strong)] group-hover:underline group-hover:underline-offset-4">
+                        Read more <span aria-hidden>→</span>
+                      </span>
+                    </Link>
                   </Reveal>
                 ))}
               </div>
