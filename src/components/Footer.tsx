@@ -76,7 +76,10 @@ export function Footer({ settings }: { settings: SiteSettings }) {
       <div className="border-t border-[var(--color-subtle)]/60">
         <Container className="flex flex-col gap-2 py-6 text-xs text-[var(--color-muted)] md:flex-row md:items-center md:justify-between">
           <p>
-            © {year} {settings.practiceName}. All rights reserved.
+            © {year} {settings.practiceName}. All rights reserved. ·{" "}
+            <Link href="/privacy" className="underline-offset-4 hover:text-[var(--color-foreground)] hover:underline">
+              Privacy
+            </Link>
           </p>
           {settings.footerText ? <p>{settings.footerText}</p> : null}
         </Container>
