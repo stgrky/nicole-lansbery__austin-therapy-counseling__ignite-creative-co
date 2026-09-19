@@ -9,12 +9,15 @@
  *
  * API reference: https://docs.paubox.com/docs/paubox_email_api/messages
  *
- * One constraint shapes the email: Paubox only accepts a Reply-To on a domain
- * verified in the account, so it cannot be the visitor's own address. Hitting
- * Reply therefore would NOT reach the person who wrote in. The notification
- * leads with a "Reply to …" link and says so plainly, and the From address is
- * one that nobody reads, so a habitual Reply bounces visibly rather than
- * landing somewhere that looks like it worked.
+ * Reply-To carries the visitor's own address, so hitting Reply answers the
+ * person who wrote in. Paubox's docs say Reply-To "must match a verified
+ * domain", but that isn't what it does: tested live on 2026-09-19 against a
+ * verified grantkyle.com, a Reply-To on gmail.com was accepted AND delivered
+ * intact. The "Reply to …" button stays as a second route to the same address.
+ *
+ * If Paubox ever does start enforcing that, the failure is visible rather than
+ * silent: replies would fall back to the From address, which is a send-only
+ * mailbox nobody reads, so they bounce instead of vanishing.
  *
  * Deliberately free of imports so it can be exercised directly with Node.
  */
@@ -65,10 +68,10 @@ const escapeHtml = (value: string) =>
 /** The Paubox request body for one inquiry. */
 export function buildNotification(inquiry: Inquiry, route: { from: string; to: string }) {
   const replyLink = `mailto:${inquiry.email}?subject=${encodeURIComponent("Re: your message")}`;
-  const warning = `To reply, email ${inquiry.name} at ${inquiry.email}. Hitting Reply on this message will not reach them.`;
+  const replyNote = `Reply to this email to answer ${inquiry.name} — your reply goes to ${inquiry.email}.`;
 
   const plain = [
-    warning,
+    replyNote,
     "",
     `Name: ${inquiry.name}`,
     `Email: ${inquiry.email}`,
@@ -86,7 +89,7 @@ export function buildNotification(inquiry: Inquiry, route: { from: string; to: s
 
   const html = `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.55;color:#1d2433;max-width:560px">
   <p style="margin:0 0 6px"><a href="${escapeHtml(replyLink)}" style="display:inline-block;background:#3f6b5a;color:#ffffff;text-decoration:none;padding:10px 18px;border-radius:999px;font-weight:600">Reply to ${escapeHtml(inquiry.name)}</a></p>
-  <p style="margin:0 0 20px;font-size:13px;color:#667085">Hitting Reply on this message will not reach them &mdash; use the button, or email ${escapeHtml(inquiry.email)} directly.</p>
+  <p style="margin:0 0 20px;font-size:13px;color:#667085">Or just hit Reply &mdash; either way your answer goes to ${escapeHtml(inquiry.email)}.</p>
   <table style="border-collapse:collapse;font-size:15px">
     ${row("Name", escapeHtml(inquiry.name))}
     ${row("Email", `<a href="${escapeHtml(replyLink)}">${escapeHtml(inquiry.email)}</a>`)}
@@ -102,6 +105,9 @@ export function buildNotification(inquiry: Inquiry, route: { from: string; to: s
         recipients: [route.to],
         headers: {
           from: route.from,
+          // Bare address, no display name: the visitor's name is untrusted
+          // input and has no business in a header that parsers split on.
+          "reply-to": inquiry.email,
           // The visitor's address is in the subject so it's visible from the
           // inbox list, before the email is even opened.
           subject: oneLine(`Website inquiry from ${inquiry.name} (${inquiry.email})`).slice(0, 200),
