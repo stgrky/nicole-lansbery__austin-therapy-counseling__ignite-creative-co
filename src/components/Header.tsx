@@ -30,8 +30,12 @@ type Props = {
  * The height the logo renders at, doubled for retina. Everything else is
  * derived from the file's own aspect ratio, so a wide logo gets a wide box and
  * a square one gets a square box, and neither is ever trimmed to fit.
+ *
+ * 56px rather than 40: Nicole's file is a stacked lockup sitting inside a lot
+ * of transparent padding, so the artwork only ever fills part of whatever box
+ * it is given. Raising the box is the half of that we can fix from here.
  */
-const LOGO_BOX_HEIGHT = 80;
+const LOGO_BOX_HEIGHT = 112;
 
 export function Header({
   practiceName,
@@ -68,7 +72,7 @@ export function Header({
               width={logoWidth}
               height={LOGO_BOX_HEIGHT}
               fit="max"
-              className="h-9 w-auto md:h-10"
+              className="h-12 w-auto md:h-14"
             />
           ) : (
             <span className="font-serif text-xl tracking-tight">
