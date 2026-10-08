@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { PracticeStructuredData } from "@/components/PracticeStructuredData";
 import { StickyCta } from "@/components/site/StickyCta";
 import { defaultAnnouncement, defaultSiteSettings } from "@/lib/site-defaults";
-import { safeFetch } from "@/sanity/client";
+import { hasPublishedPosts, safeFetch } from "@/sanity/client";
 import { announcementQuery, siteSettingsQuery } from "@/sanity/queries";
 import type { Announcement, SiteSettings } from "@/sanity/types";
 
@@ -26,9 +26,12 @@ export default async function SiteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [settings, announcement] = await Promise.all([
+  // Fetched here rather than in each component so the nav, the footer and the
+  // page all agree within a single render.
+  const [settings, announcement, showBlog] = await Promise.all([
     getSiteSettings(),
     getAnnouncement(),
+    hasPublishedPosts(),
   ]);
   return (
     <>
@@ -42,9 +45,10 @@ export default async function SiteLayout({
         logoAspectRatio={settings.logoAspectRatio}
         ctaLabel={settings.stickyCta?.label}
         ctaHref={settings.stickyCta?.href}
+        showBlog={showBlog}
       />
       <main className="flex-1">{children}</main>
-      <Footer settings={settings} />
+      <Footer settings={settings} showBlog={showBlog} />
       <StickyCta
         label={settings.stickyCta?.label}
         href={settings.stickyCta?.href}

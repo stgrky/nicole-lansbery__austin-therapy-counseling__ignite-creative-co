@@ -11,7 +11,7 @@ import { SanityImg } from "@/components/SanityImg";
 import { demoBlogIndex } from "@/lib/demo-posts";
 import { formatDateLong } from "@/lib/format";
 import { defaultRecentPosts } from "@/lib/site-defaults";
-import { safeFetch } from "@/sanity/client";
+import { hasPublishedPosts, safeFetch } from "@/sanity/client";
 import { isSanityConfigured } from "@/sanity/env";
 import { blogIndexQuery, recentPostsQuery } from "@/sanity/queries";
 import type { BlogIndexResult, RecentPost } from "@/sanity/types";
@@ -36,6 +36,10 @@ function parsePage(raw: string | undefined) {
 }
 
 export default async function BlogIndexRoute({ searchParams }: BlogPageProps) {
+  // With no published posts the blog does not exist as far as the site is
+  // concerned: an empty index page is a dead end that Google will still index.
+  if (!(await hasPublishedPosts())) notFound();
+
   const { page: rawPage } = await searchParams;
   const page = parsePage(rawPage);
 

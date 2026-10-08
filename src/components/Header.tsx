@@ -21,6 +21,8 @@ type Props = {
   /** Shares siteSettings.stickyCta, so one edit changes both buttons. */
   ctaLabel?: string;
   ctaHref?: string;
+  /** False until the first post is published, which hides the Blog link. */
+  showBlog?: boolean;
 };
 
 /**
@@ -36,7 +38,10 @@ export function Header({
   logoAspectRatio,
   ctaLabel,
   ctaHref,
+  showBlog = false,
 }: Props) {
+  // One list for both navs below, so they can never disagree about the blog.
+  const navLinks = showBlog ? NAV_LINKS : NAV_LINKS.filter((l) => l.href !== "/blog");
   // Falls back to 4:1, a typical wordmark, when metadata is missing. Clamped
   // because an extreme ratio either way would push the nav around.
   const ratio = Math.min(Math.max(logoAspectRatio || 4, 0.5), 8);
@@ -71,7 +76,7 @@ export function Header({
           )}
         </Link>
         <nav className="hidden items-center gap-6 text-sm md:flex">
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -93,7 +98,7 @@ export function Header({
       </Container>
       <Container className="flex justify-between gap-4 pb-3 md:hidden">
         <nav className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}

@@ -1,6 +1,7 @@
 import { createClient } from "next-sanity";
 
 import { apiVersion, dataset, isSanityConfigured, projectId } from "./env";
+import { publishedPostCountQuery } from "./queries";
 
 export const sanityClient = isSanityConfigured
   ? createClient({
@@ -37,4 +38,25 @@ export async function safeFetch<T>(
   // the persona either.
   if (fallback === null) return fallback;
   throw new Error(`[sanity] expected a document and got none: ${query.slice(0, 80)}`);
+}
+
+/**
+ * True when the practice has at least one published post.
+ *
+ * Returns false rather than throwing if Sanity is unreachable: a blog link
+ * that leads to an empty page is a worse failure than a blog that is briefly
+ * hidden, and this runs on every page render.
+ */
+export async function hasPublishedPosts(): Promise<boolean> {
+  if (!sanityClient) return false;
+  try {
+    const count = await sanityClient.fetch<number>(
+      publishedPostCountQuery,
+      {},
+      { cache: "no-store" },
+    );
+    return (count ?? 0) > 0;
+  } catch {
+    return false;
+  }
 }

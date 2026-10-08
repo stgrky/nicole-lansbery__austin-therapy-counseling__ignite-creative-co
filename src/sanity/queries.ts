@@ -1,3 +1,11 @@
+/**
+ * How many posts are actually published. The blog hides itself completely when
+ * this is zero: no nav link, no footer link, no /blog page, no sitemap entries.
+ * Publishing the first post brings all of it back with no code change, because
+ * every page fetches with cache: "no-store" and nothing here is baked at build.
+ */
+export const publishedPostCountQuery = groq`count(*[_type == "post" && defined(slug.current)])`;
+
 import { groq } from "next-sanity";
 
 export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]{
