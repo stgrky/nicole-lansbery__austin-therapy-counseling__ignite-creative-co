@@ -11,7 +11,7 @@ import {
 
 import { defaultSiteSettings } from "@/lib/site-defaults";
 import { Analytics } from "@/components/Analytics";
-import { SITE_URL } from "@/lib/site";
+import { IS_PRODUCTION_DEPLOYMENT, SITE_URL } from "@/lib/site";
 import { safeFetch } from "@/sanity/client";
 import { urlFor } from "@/sanity/image";
 import { siteSettingsQuery } from "@/sanity/queries";
@@ -103,6 +103,9 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s · ${practiceName}`,
     },
     description,
+    // robots.txt stops a crawl; this is what drops a URL that was already
+    // found. Previews need both.
+    robots: IS_PRODUCTION_DEPLOYMENT ? undefined : { index: false, follow: false },
     openGraph: { siteName: practiceName, type: "website", locale: "en_US" },
     icons: faviconUrl
       ? {
