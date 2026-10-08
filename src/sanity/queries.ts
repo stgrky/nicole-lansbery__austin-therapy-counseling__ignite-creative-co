@@ -6,6 +6,9 @@ export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]{
   palette,
   fontPairing,
   logo,
+  // The logo's real shape, so the header can reserve exactly the right box and
+  // never guess an aspect ratio it then has to crop to.
+  "logoAspectRatio": logo.asset->metadata.dimensions.aspectRatio,
   favicon,
   email,
   phone,

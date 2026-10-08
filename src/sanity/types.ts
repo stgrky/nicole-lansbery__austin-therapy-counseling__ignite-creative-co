@@ -29,6 +29,8 @@ export interface SiteSettings {
   palette?: PaletteName;
   fontPairing?: FontPairingName;
   logo?: SanityImageWithAlt;
+  /** width / height of the uploaded logo, from Sanity's asset metadata. */
+  logoAspectRatio?: number;
   favicon?: SanityImageWithAlt;
   email?: string;
   phone?: string;

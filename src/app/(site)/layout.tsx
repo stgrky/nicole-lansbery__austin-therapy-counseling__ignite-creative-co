@@ -39,6 +39,7 @@ export default async function SiteLayout({
       <Header
         practiceName={settings.practiceName ?? "Therapy Practice"}
         logo={settings.logo}
+        logoAspectRatio={settings.logoAspectRatio}
       />
       <main className="flex-1">{children}</main>
       <Footer settings={settings} />

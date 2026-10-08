@@ -16,9 +16,22 @@ const NAV_LINKS = [
 type Props = {
   practiceName: string;
   logo?: SanityImageWithAlt;
+  /** width / height of the uploaded file, from Sanity's asset metadata. */
+  logoAspectRatio?: number;
 };
 
-export function Header({ practiceName, logo }: Props) {
+/**
+ * The height the logo renders at, doubled for retina. Everything else is
+ * derived from the file's own aspect ratio, so a wide logo gets a wide box and
+ * a square one gets a square box, and neither is ever trimmed to fit.
+ */
+const LOGO_BOX_HEIGHT = 80;
+
+export function Header({ practiceName, logo, logoAspectRatio }: Props) {
+  // Falls back to 4:1, a typical wordmark, when metadata is missing. Clamped
+  // because an extreme ratio either way would push the nav around.
+  const ratio = Math.min(Math.max(logoAspectRatio || 4, 0.5), 8);
+  const logoWidth = Math.round(LOGO_BOX_HEIGHT * ratio);
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--color-subtle)]/60 bg-[var(--color-background)]/85 backdrop-blur">
       <Container className="flex items-center justify-between gap-6 py-5">
@@ -28,12 +41,19 @@ export function Header({ practiceName, logo }: Props) {
           aria-label={practiceName}
         >
           {logo?.asset ? (
+            // fit="max" is the whole fix: the default is "crop", which asked
+            // Sanity for a 320x80 box and center-trimmed anything that was not
+            // already 4:1. A square logo lost everything outside the middle
+            // band. "max" scales to fit and never trims, and the width above
+            // comes from the file itself so the reserved box matches what
+            // arrives — no stretch, no crop, no layout shift.
             <SanityImg
               image={logo}
               alt={logo.alt ?? practiceName}
-              width={320}
-              height={80}
-              className="h-9 w-auto object-contain md:h-10"
+              width={logoWidth}
+              height={LOGO_BOX_HEIGHT}
+              fit="max"
+              className="h-9 w-auto md:h-10"
             />
           ) : (
             <span className="font-serif text-xl tracking-tight">
