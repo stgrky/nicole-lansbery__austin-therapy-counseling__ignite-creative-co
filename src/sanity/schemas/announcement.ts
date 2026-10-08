@@ -24,7 +24,7 @@ export const announcement = defineType({
       name: "linkLabel",
       title: "Link label (optional)",
       description:
-        "Optional clickable text shown at the end of the message — e.g. 'Book a free consult'.",
+        "Optional clickable text shown at the end of the message — e.g. 'Reach Out'.",
       type: "string",
     }),
     defineField({

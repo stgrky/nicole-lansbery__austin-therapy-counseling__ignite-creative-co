@@ -18,6 +18,9 @@ type Props = {
   logo?: SanityImageWithAlt;
   /** width / height of the uploaded file, from Sanity's asset metadata. */
   logoAspectRatio?: number;
+  /** Shares siteSettings.stickyCta, so one edit changes both buttons. */
+  ctaLabel?: string;
+  ctaHref?: string;
 };
 
 /**
@@ -27,7 +30,13 @@ type Props = {
  */
 const LOGO_BOX_HEIGHT = 80;
 
-export function Header({ practiceName, logo, logoAspectRatio }: Props) {
+export function Header({
+  practiceName,
+  logo,
+  logoAspectRatio,
+  ctaLabel,
+  ctaHref,
+}: Props) {
   // Falls back to 4:1, a typical wordmark, when metadata is missing. Clamped
   // because an extreme ratio either way would push the nav around.
   const ratio = Math.min(Math.max(logoAspectRatio || 4, 0.5), 8);
@@ -72,11 +81,14 @@ export function Header({ practiceName, logo, logoAspectRatio }: Props) {
             </Link>
           ))}
         </nav>
+        {/* Label and destination come from Site Settings, the same document
+            the floating pill reads, so Nicole changes both in one place. The
+            fallbacks are only for a dataset that has not set them. */}
         <Link
-          href="/contact"
+          href={ctaHref ?? "/contact"}
           className="hidden rounded-full bg-[var(--color-accent)] px-4 py-2 text-sm text-white transition hover:bg-[var(--color-accent-strong)] md:inline-flex"
         >
-          Book a consult
+          {ctaLabel ?? "Reach Out"}
         </Link>
       </Container>
       <Container className="flex justify-between gap-4 pb-3 md:hidden">

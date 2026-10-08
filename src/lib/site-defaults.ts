@@ -29,7 +29,7 @@ export const defaultSiteSettings: SiteSettings = {
   socialLinks: [],
   footerText:
     "Licensed Clinical Social Worker (OR #L-9042). The words here are for reflection, not a replacement for care. If you're in crisis, call or text 988 — someone is there, any hour.",
-  stickyCta: { label: "Book a consultation", href: "/contact" },
+  stickyCta: { label: "Reach Out", href: "/contact" },
 };
 
 export const defaultHomePage: HomePage = {
@@ -42,7 +42,7 @@ export const defaultHomePage: HomePage = {
       "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=760&h=900&fit=crop&q=80",
     alt: "Nora Bennett, LCSW",
   },
-  primaryCta: { label: "Book a free consultation", href: "/contact" },
+  primaryCta: { label: "Reach Out", href: "/contact" },
   secondaryCta: { label: "Meet Nora", href: "/about" },
   whatToExpectHeading: "Starting is the hardest part. Here's how gentle it can be.",
   whatToExpectIntro:

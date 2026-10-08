@@ -223,7 +223,7 @@ export default async function AboutPageRoute() {
               href="/contact"
               className="mt-10 inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-7 py-3.5 text-sm font-medium text-white shadow-[0_10px_30px_-12px_rgba(74,106,93,0.5)] transition hover:bg-[var(--color-accent-strong)]"
             >
-              Book a free consult
+              Reach Out
               <span aria-hidden>→</span>
             </Link>
           </Reveal>

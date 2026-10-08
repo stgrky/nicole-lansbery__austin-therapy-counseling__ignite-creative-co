@@ -11,7 +11,7 @@ type Props = {
 };
 
 /**
- * Floating "Book a free consult" pill that appears after the user scrolls
+ * Floating "Reach Out" pill that appears after the user scrolls
  * past ~70% of the viewport height. Disappears near the footer so it
  * doesn't compete with the final CTA. Disabled when prefers-reduced-motion
  * is set.
