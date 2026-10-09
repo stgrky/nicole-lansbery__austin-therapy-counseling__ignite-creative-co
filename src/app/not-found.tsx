@@ -11,7 +11,7 @@ export const metadata: Metadata = {
  * no header, no links, and no practice name — a dead end for anyone following
  * an old link (her previous site's addresses stop existing at launch) or a
  * mistyped one. Rendered inside the root layout, so the site's fonts and
- * colours apply; the header and footer belong to the (site) group and don't.
+ * colors apply; the header and footer belong to the (site) group and don't.
  */
 export default function NotFound() {
   return (

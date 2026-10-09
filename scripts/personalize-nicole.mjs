@@ -134,7 +134,7 @@ const patches = {
       "Licensed Professional Counselor Supervisor (LPC-S) — Texas",
       "Licensed Marriage and Family Therapist Supervisor (LMFT-S) — Texas",
     ],
-    // Both sections make claims about how she practises and where she trained.
+    // Both sections make claims about how she practices and where she trained.
     // Off until she writes them.
     showPrinciples: false,
     showTimeline: false,

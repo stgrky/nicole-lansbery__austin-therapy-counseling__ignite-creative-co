@@ -42,7 +42,7 @@ export const aboutPage = defineType({
       title: "Credential badges",
       type: "array",
       description:
-        "Certification and membership logos (like a PSI or EMDRIA badge), shown centred below your credentials. Press \"Add item\" to upload another; use the ⋮ menu to remove one. Upload them with transparent backgrounds — a badge saved as a JPEG carries a white box behind it.",
+        "Certification and membership logos (like a PSI or EMDRIA badge), shown centered below your credentials. Press \"Add item\" to upload another; use the ⋮ menu to remove one. Upload them with transparent backgrounds — a badge saved as a JPEG carries a white box behind it.",
       of: [
         {
           type: "image",

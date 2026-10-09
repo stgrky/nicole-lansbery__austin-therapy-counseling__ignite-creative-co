@@ -196,7 +196,7 @@ export default async function AboutPageRoute() {
         </section>
       ) : null}
 
-      {/* ── CREDENTIAL BADGES ── centred on their own, below the card ── */}
+      {/* ── CREDENTIAL BADGES ── centered on their own, below the card ── */}
       <CredentialBadges badges={about.credentialBadges} />
 
       {/* ── CLOSING CTA ── */}

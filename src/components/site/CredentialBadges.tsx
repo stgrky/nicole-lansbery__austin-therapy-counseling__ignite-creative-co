@@ -28,7 +28,7 @@ function badgeBox(badge: SanityImageWithAlt) {
 }
 
 /**
- * Certification and membership marks, centred on their own, the way practices
+ * Certification and membership marks, centered on their own, the way practices
  * usually display them — standing apart rather than tucked into a list.
  * Hides itself when there are none, so a site with no badges renders exactly
  * as it did before this section existed.
