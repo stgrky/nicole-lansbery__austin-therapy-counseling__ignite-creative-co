@@ -107,6 +107,9 @@ export async function generateMetadata(): Promise<Metadata> {
     // found. Previews need both.
     robots: IS_PRODUCTION_DEPLOYMENT ? undefined : { index: false, follow: false },
     openGraph: { siteName: practiceName, type: "website", locale: "en_US" },
+    // Next emits `twitter:image` from the same card, but X shows it as a
+    // small square unless the card type says otherwise.
+    twitter: { card: "summary_large_image" },
     icons: faviconUrl
       ? {
           icon: [{ url: faviconUrl, sizes: "any" }],
