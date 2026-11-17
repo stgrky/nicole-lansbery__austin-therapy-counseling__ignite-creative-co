@@ -106,7 +106,17 @@ export async function generateMetadata(): Promise<Metadata> {
     // robots.txt stops a crawl; this is what drops a URL that was already
     // found. Previews need both.
     robots: IS_PRODUCTION_DEPLOYMENT ? undefined : { index: false, follow: false },
-    openGraph: { siteName: practiceName, type: "website", locale: "en_US" },
+    // `og:url` is what makes Facebook/LinkedIn treat every spelling of the
+    // domain as one page. Without it they cache a separate preview per URL
+    // string (www vs apex, http vs https), so one blank card poisons only
+    // one of them and the others look fine. "./" resolves per route against
+    // metadataBase.
+    openGraph: {
+      siteName: practiceName,
+      type: "website",
+      locale: "en_US",
+      url: "./",
+    },
     // Next emits `twitter:image` from the same card, but X shows it as a
     // small square unless the card type says otherwise.
     twitter: { card: "summary_large_image" },
